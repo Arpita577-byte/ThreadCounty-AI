@@ -14,12 +14,12 @@ export function Stats() {
     <section className="relative py-20">
       <div className="mx-auto max-w-6xl px-4">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-card/50 p-8 md:p-12">
+          <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-card/40 p-8 shadow-xl shadow-primary/5 backdrop-blur-sm md:p-12">
             <div
-              className="pointer-events-none absolute inset-0 opacity-50"
+              className="pointer-events-none absolute inset-0 opacity-60"
               style={{
                 background:
-                  'radial-gradient(ellipse 60% 80% at 50% 0%, oklch(0.66 0.18 250 / 0.15), transparent 70%)',
+                  'radial-gradient(ellipse 60% 80% at 50% 0%, oklch(0.66 0.18 250 / 0.18), transparent 70%), radial-gradient(ellipse 40% 50% at 80% 100%, oklch(0.72 0.15 165 / 0.1), transparent 60%)',
               }}
             />
             <div className="relative grid grid-cols-2 gap-8 md:grid-cols-4">

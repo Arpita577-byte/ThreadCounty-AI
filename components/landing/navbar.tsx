@@ -50,8 +50,10 @@ export function Navbar() {
       className="fixed inset-x-0 top-0 z-50 px-4 pt-3"
     >
       <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-300 ${
-          scrolled ? 'glass shadow-lg shadow-black/20' : 'border border-transparent'
+        className={`mx-auto flex max-w-7xl items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-500 ${
+          scrolled
+            ? 'glass shadow-xl shadow-black/25 border border-border/50'
+            : 'border border-transparent bg-transparent'
         }`}
       >
         <a href="#top" aria-label="ThreadCounty home">
@@ -79,13 +81,13 @@ export function Navbar() {
           >
             {light ? <MoonStar className="size-4" /> : <Sun className="size-4" />}
           </button>
-          <a href="#contact" className="hidden sm:block">
+          <a href="/login" className="hidden sm:block">
             <Button variant="ghost" size="sm" className="text-muted-foreground">
               Sign in
             </Button>
           </a>
           <Magnetic className="hidden sm:block">
-            <a href="#pricing">
+            <a href="/signup">
               <Button size="sm" className="glow-ring">
                 Get Started
               </Button>
@@ -121,7 +123,7 @@ export function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <a href="#pricing" onClick={() => setOpen(false)} className="mt-2">
+              <a href="/signup" onClick={() => setOpen(false)} className="mt-2">
                 <Button className="w-full">Get Started</Button>
               </a>
             </div>

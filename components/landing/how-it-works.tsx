@@ -37,11 +37,15 @@ export function HowItWorks() {
 
         <div className="relative mt-16">
           {/* connecting line */}
-          <div
-            className="absolute left-0 right-0 top-7 hidden h-px md:block"
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute left-0 right-0 top-7 hidden h-px origin-left md:block"
             style={{
               background:
-                'linear-gradient(to right, transparent, oklch(0.66 0.18 250 / 0.5), oklch(0.72 0.15 165 / 0.5), transparent)',
+                'linear-gradient(to right, transparent, oklch(0.66 0.18 250 / 0.6), oklch(0.72 0.15 165 / 0.6), transparent)',
             }}
           />
           <div className="grid gap-10 md:grid-cols-3 md:gap-6">

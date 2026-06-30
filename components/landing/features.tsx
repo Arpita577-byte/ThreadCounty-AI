@@ -70,7 +70,7 @@ export function Features() {
           {FEATURES.map((f) => (
             <StaggerItem key={f.title}>
               <Tilt className="h-full">
-                <div className="group relative h-full overflow-hidden rounded-2xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:glow-ring">
+                <div className="group border-beam relative h-full overflow-hidden rounded-2xl glass p-6 transition-all duration-300 hover:-translate-y-1.5 hover:glow-ring hover:shadow-xl hover:shadow-primary/5">
                   <div
                     className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
                     style={{

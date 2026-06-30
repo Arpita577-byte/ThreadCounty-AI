@@ -3,7 +3,9 @@ import { CursorGlow } from '@/components/landing/cursor-glow'
 import { Faq } from '@/components/landing/faq'
 import { Features } from '@/components/landing/features'
 import { Footer } from '@/components/landing/footer'
+import { GrainOverlay } from '@/components/landing/grain-overlay'
 import { Hero } from '@/components/landing/hero'
+import { HeroMarquee } from '@/components/landing/hero-marquee'
 import { HowItWorks } from '@/components/landing/how-it-works'
 import { Industries } from '@/components/landing/industries'
 import { LoadingScreen } from '@/components/landing/loading-screen'
@@ -19,9 +21,11 @@ export default function Page() {
       <LoadingScreen />
       <ScrollProgress />
       <CursorGlow />
+      <GrainOverlay />
       <Navbar />
       <main className="relative overflow-x-hidden">
         <Hero />
+        <HeroMarquee />
         <Features />
         <HowItWorks />
         <Industries />

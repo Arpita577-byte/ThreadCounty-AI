@@ -1,6 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk, Geist_Mono } from 'next/font/google'
+import { SmoothScroll } from '@/components/providers/smooth-scroll'
+import { Providers } from '@/components/providers/providers'
 import './globals.css'
 
 const inter = Inter({ variable: '--font-inter', subsets: ['latin'] })
@@ -50,7 +52,9 @@ export default function RootLayout({
       className={`dark ${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} bg-background`}
     >
       <body className="font-sans antialiased">
-        {children}
+        <Providers>
+          <SmoothScroll>{children}</SmoothScroll>
+        </Providers>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
