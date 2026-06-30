@@ -5,7 +5,7 @@ import { Clock, FileText, Loader2, Upload } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { MOCK_UPLOADS } from '@/lib/mock/dashboard'
+import { usePlatformData } from '@/hooks/use-platform-data'
 import { cn } from '@/lib/utils'
 
 const STATUS_STYLES = {
@@ -25,6 +25,9 @@ function formatDate(iso: string) {
 }
 
 export function RecentUploads() {
+  const { uploads } = usePlatformData()
+  const recent = uploads.slice(0, 4)
+
   return (
     <Card className="glass border-border/60">
       <CardHeader className="flex-row items-center justify-between pb-2">
@@ -37,7 +40,7 @@ export function RecentUploads() {
         </Link>
       </CardHeader>
       <CardContent className="space-y-3">
-        {MOCK_UPLOADS.map((upload, i) => (
+        {recent.map((upload, i) => (
           <motion.div
             key={upload.id}
             initial={{ opacity: 0, x: -12 }}
@@ -51,6 +54,7 @@ export function RecentUploads() {
                 alt={upload.fileName}
                 fill
                 className="object-cover"
+                unoptimized
               />
             </div>
             <div className="min-w-0 flex-1">

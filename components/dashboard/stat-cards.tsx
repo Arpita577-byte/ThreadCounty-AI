@@ -13,52 +13,61 @@ import Link from 'next/link'
 import { Counter } from '@/components/landing/primitives'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { MOCK_STATS } from '@/lib/mock/dashboard'
+import { usePlatformData } from '@/hooks/use-platform-data'
 import { cn } from '@/lib/utils'
 
-const STATS = [
-  {
-    label: 'Total uploads',
-    value: MOCK_STATS.totalUploads,
-    suffix: '',
-    decimals: 0,
-    icon: CloudUpload,
-    trend: '+12%',
-    color: 'text-primary',
-  },
-  {
-    label: 'Reports generated',
-    value: MOCK_STATS.totalReports,
-    suffix: '',
-    decimals: 0,
-    icon: FileText,
-    trend: '+8%',
-    color: 'text-accent',
-  },
-  {
-    label: 'Avg quality score',
-    value: MOCK_STATS.avgQualityScore,
-    suffix: '',
-    decimals: 1,
-    icon: BarChart3,
-    trend: '+2.1',
-    color: 'text-primary',
-  },
-  {
-    label: 'This month',
-    value: MOCK_STATS.analysesThisMonth,
-    suffix: ' analyses',
-    decimals: 0,
-    icon: Sparkles,
-    trend: 'On track',
-    color: 'text-accent',
-  },
-]
-
 export function StatCards() {
+  const { uploads, reports, storageUsedMb } = usePlatformData()
+
+  const avgQuality =
+    reports.length > 0
+      ? reports.reduce((s, r) => s + r.qualityScore, 0) / reports.length
+      : 0
+
+  const thisMonth = uploads.filter((u) => {
+    const d = new Date(u.createdAt)
+    const now = new Date()
+    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()
+  }).length
+
+  const stats = [
+    {
+      label: 'Total uploads',
+      value: uploads.length,
+      suffix: '',
+      decimals: 0,
+      icon: CloudUpload,
+      color: 'text-primary',
+    },
+    {
+      label: 'Reports generated',
+      value: reports.length,
+      suffix: '',
+      decimals: 0,
+      icon: FileText,
+      color: 'text-accent',
+    },
+    {
+      label: 'Avg quality score',
+      value: avgQuality,
+      suffix: '',
+      decimals: 1,
+      icon: BarChart3,
+      color: 'text-primary',
+    },
+    {
+      label: 'This month',
+      value: thisMonth,
+      suffix: ' analyses',
+      decimals: 0,
+      icon: Sparkles,
+      color: 'text-accent',
+    },
+  ]
+
   return (
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {STATS.map((stat, i) => (
+      {stats.map((stat, i) => (
         <motion.div
           key={stat.label}
           initial={{ opacity: 0, y: 16 }}
@@ -67,18 +76,13 @@ export function StatCards() {
         >
           <Card className="glass border-border/60 transition-all hover:-translate-y-0.5 hover:glow-ring">
             <CardContent className="p-5">
-              <div className="flex items-start justify-between">
-                <div
-                  className={cn(
-                    'grid size-10 place-items-center rounded-xl bg-secondary/60',
-                    stat.color,
-                  )}
-                >
-                  <stat.icon className="size-5" />
-                </div>
-                <span className="text-[10px] font-medium text-accent">
-                  {stat.trend}
-                </span>
+              <div
+                className={cn(
+                  'grid size-10 place-items-center rounded-xl bg-secondary/60',
+                  stat.color,
+                )}
+              >
+                <stat.icon className="size-5" />
               </div>
               <p className="mt-4 font-heading text-3xl font-semibold">
                 <Counter
@@ -97,9 +101,9 @@ export function StatCards() {
 }
 
 export function StorageCard() {
-  const pct = Math.round(
-    (MOCK_STATS.storageUsedMb / MOCK_STATS.storageLimitMb) * 100,
-  )
+  const { storageUsedMb } = usePlatformData()
+  const limitMb = 5120
+  const pct = Math.min(Math.round((storageUsedMb / limitMb) * 100), 100)
 
   return (
     <Card className="glass border-border/60">
@@ -112,9 +116,9 @@ export function StorageCard() {
       <CardContent>
         <div className="flex items-end justify-between">
           <p className="font-heading text-2xl font-semibold">
-            {MOCK_STATS.storageUsedMb}{' '}
+            {storageUsedMb}{' '}
             <span className="text-base font-normal text-muted-foreground">
-              / {MOCK_STATS.storageLimitMb} MB
+              / {limitMb} MB
             </span>
           </p>
           <span className="text-sm text-muted-foreground">{pct}%</span>

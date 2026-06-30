@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { Download, FileText, LogIn, Upload } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { MOCK_ACTIVITY } from '@/lib/mock/dashboard'
+import { usePlatformData } from '@/hooks/use-platform-data'
 import { cn } from '@/lib/utils'
 
 const ICONS = {
@@ -28,6 +28,9 @@ function timeAgo(iso: string) {
 }
 
 export function ActivityTimeline() {
+  const { activity } = usePlatformData()
+  const items = activity.slice(0, 5)
+
   return (
     <Card className="glass border-border/60">
       <CardHeader className="pb-2">
@@ -36,7 +39,7 @@ export function ActivityTimeline() {
       <CardContent>
         <div className="relative space-y-0">
           <div className="absolute bottom-2 left-[15px] top-2 w-px bg-border" />
-          {MOCK_ACTIVITY.map((item, i) => {
+          {items.map((item, i) => {
             const Icon = ICONS[item.type]
             return (
               <motion.div
