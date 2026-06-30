@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   title: 'ThreadCounty — AI-Powered Textile Intelligence',
   description:
     'Upload fabric images and receive instant AI-driven textile analysis with enterprise-grade precision. Thread density, warp & weft counts, and quality scoring in seconds.',
-  generator: 'v0.app',
   keywords: [
     'textile AI',
     'fabric analysis',

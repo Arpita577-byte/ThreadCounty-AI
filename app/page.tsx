@@ -1,5 +1,4 @@
 import { Contact } from '@/components/landing/contact'
-import { CursorGlow } from '@/components/landing/cursor-glow'
 import { Faq } from '@/components/landing/faq'
 import { Features } from '@/components/landing/features'
 import { Footer } from '@/components/landing/footer'
@@ -20,7 +19,6 @@ export default function Page() {
     <>
       <LoadingScreen />
       <ScrollProgress />
-      <CursorGlow />
       <GrainOverlay />
       <Navbar />
       <main className="relative overflow-x-hidden">
